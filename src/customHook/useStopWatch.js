@@ -25,6 +25,7 @@ export function useStopWatch() {
   const reset = () => {
     setSeconds(0);
     setIsRunning(false);
+    localStorage.removeItem(STORAGE_KEY);
   };
 
   useEffect(() => {
