@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { useStopWatch } from "./customHook/useStopWatch";
 
 function App() {
+  const { seconds, isRunning, start, stop, reset } = useStopWatch();
+  
+  const formatTime = (totalSeconds) => {
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(
+      2,
+      "0"
+    )}`;
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Stopwatch</h1>
+      <p>Seconds: {formatTime(seconds)}</p>
+      <button onClick={start} disabled={isRunning}>
+        Start
+      </button>
+      <button onClick={stop} disabled={!isRunning}>
+        Stop
+      </button>
+      <button onClick={reset}>Reset</button>
     </div>
   );
 }
